@@ -10,7 +10,11 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerID;
     private String title;
+
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String surname;
 
     public Customer(Integer customerID, String title, String firstName, String surname, List<ClaimsDetails> claimsDetails) {

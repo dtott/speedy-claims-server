@@ -1,5 +1,6 @@
 package com.allstate.speedyclaimsserver.domain;
 
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -9,19 +10,30 @@ public class ClaimsDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer claimId;
-    private Integer policyNumber;
 
     @ManyToOne
-    @JoinColumn(name="customerID")
+    @JoinColumn(name="customerID", nullable = false)
     private Customer customer;
 
-
+    @Column(nullable = false)
     private String status;
+
+    @Column(nullable = false)
     private String type;
+
+    @Column(nullable = false)
     private Double estimatedValue;
-    private LocalDate claimOpenDate;
+
+    @Column(nullable = false)
+    private LocalDate claimOpenDate = LocalDate.now();
+
+    @Column(nullable = false)
     private String claimReason;
+
+    @Column(nullable = false)
     private String claimDescription;
+
+    @Column(nullable = false)
     private LocalDate incidentDate;
     private String furtherDetails;
 
@@ -40,9 +52,8 @@ public class ClaimsDetails {
     public ClaimsDetails() {
     }
 
-    public ClaimsDetails(Integer claimId, Integer policyNumber, Customer customer, String status, String type, Double estimatedValue, LocalDate claimOpenDate, String claimReason, String claimDescription, LocalDate incidentDate, String furtherDetails, String make, String model, Integer year, String address, String animalType, String breed) {
+    public ClaimsDetails(Integer claimId, Customer customer, String status, String type, Double estimatedValue, LocalDate claimOpenDate, String claimReason, String claimDescription, LocalDate incidentDate, String furtherDetails, String make, String model, Integer year, String address, String animalType, String breed) {
         this.claimId = claimId;
-        this.policyNumber = policyNumber;
         this.customer = customer;
         this.status = status;
         this.type = type;
@@ -66,14 +77,6 @@ public class ClaimsDetails {
 
     public void setClaimId(Integer claimId) {
         this.claimId = claimId;
-    }
-
-    public Integer getPolicyNumber() {
-        return policyNumber;
-    }
-
-    public void setPolicyNumber(Integer policyNumber) {
-        this.policyNumber = policyNumber;
     }
 
     public Customer getCustomer() {
@@ -200,7 +203,6 @@ public class ClaimsDetails {
     public String toString() {
         return "ClaimsDetails{" +
                 "claimId=" + claimId +
-                ", policyNumber=" + policyNumber +
                 ", customer=" + customer +
                 ", status='" + status + '\'' +
                 ", type='" + type + '\'' +
