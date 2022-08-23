@@ -4,6 +4,7 @@ import com.allstate.speedyclaimsserver.data.ClaimsDetailsRepository;
 import com.allstate.speedyclaimsserver.data.CustomerRepository;
 import com.allstate.speedyclaimsserver.domain.ClaimsDetails;
 import com.allstate.speedyclaimsserver.domain.Customer;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,28 @@ public class CustomerServiceImpl implements CustomerService{
         // add error here
         return null;
     }
+
+    @Override
+    public Customer findCustomerByFirstName(ObjectNode objectNode) {
+        Optional<Customer> customerEntity = customerRepository.findCustomerByFirstNameAndSurname(objectNode.get("firstName").asText(), objectNode.get("surname").asText());
+        System.out.println(customerEntity);
+        if (customerEntity.isPresent()){
+            Customer newCustomerEntity = customerEntity.get();
+            return newCustomerEntity;
+        }
+        return null;
+    }
+
+    @Override
+    public Customer addNewCustomerIfNotAlreadyAdded(Customer customer) {
+        Optional<Customer> customerEntity = customerRepository.findCustomerByFirstNameAndSurname(customer.getFirstName(), customer.getSurname());
+        System.out.println(customerEntity);
+        if (customerEntity.isPresent()){
+            Customer existingCustomerEntity = customerEntity.get();
+            return  existingCustomerEntity;
+        }
+        return customerRepository.save(customer);
+    }
+
 
 }

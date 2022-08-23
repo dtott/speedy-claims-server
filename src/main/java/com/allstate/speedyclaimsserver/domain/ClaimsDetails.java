@@ -15,25 +15,26 @@ public class ClaimsDetails {
     @JoinColumn(name="customerID", nullable = false)
     private Customer customer;
 
-    @Column(nullable = false)
-    private String status;
+//    @Column(nullable = false)
+    @ManyToOne
+    private Statuses status;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String type;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Double estimatedValue;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private LocalDate claimOpenDate = LocalDate.now();
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String claimReason;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String claimDescription;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private LocalDate incidentDate;
     private String furtherDetails;
 
@@ -52,7 +53,7 @@ public class ClaimsDetails {
     public ClaimsDetails() {
     }
 
-    public ClaimsDetails(Integer claimId, Customer customer, String status, String type, Double estimatedValue, LocalDate claimOpenDate, String claimReason, String claimDescription, LocalDate incidentDate, String furtherDetails, String make, String model, Integer year, String address, String animalType, String breed) {
+    public ClaimsDetails(Integer claimId, Customer customer, Statuses status, String type, Double estimatedValue, LocalDate claimOpenDate, String claimReason, String claimDescription, LocalDate incidentDate, String furtherDetails, String make, String model, Integer year, String address, String animalType, String breed) {
         this.claimId = claimId;
         this.customer = customer;
         this.status = status;
@@ -87,11 +88,11 @@ public class ClaimsDetails {
         this.customer = customer;
     }
 
-    public String getStatus() {
+    public Statuses getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Statuses status) {
         this.status = status;
     }
 
@@ -204,7 +205,7 @@ public class ClaimsDetails {
         return "ClaimsDetails{" +
                 "claimId=" + claimId +
                 ", customer=" + customer +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", type='" + type + '\'' +
                 ", estimatedValue=" + estimatedValue +
                 ", claimOpenDate=" + claimOpenDate +
