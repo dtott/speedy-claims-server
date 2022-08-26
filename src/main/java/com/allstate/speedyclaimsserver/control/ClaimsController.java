@@ -1,6 +1,7 @@
 package com.allstate.speedyclaimsserver.control;
 
 import com.allstate.speedyclaimsserver.data.ClaimsDetailsRepository;
+import com.allstate.speedyclaimsserver.data.StatusRepository;
 import com.allstate.speedyclaimsserver.domain.ClaimsDetails;
 import com.allstate.speedyclaimsserver.domain.Customer;
 import com.allstate.speedyclaimsserver.domain.Statuses;
@@ -12,11 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class ClaimsController {
+
+    //For testing
+    @Autowired
+    StatusRepository statusRepository;
+
+    //For testing
+    @Autowired
+    ClaimsDetailsRepository claimsDetailsRepository;
 
     @Autowired
     ClaimsService claimsService;
@@ -64,4 +74,21 @@ public class ClaimsController {
         return customerService.addNewCustomerIfNotAlreadyAdded(customer);
     }
 
+    @GetMapping("/displayClaims/{selectedStatus}")
+    public List<ClaimsDetails> getClaimsBasedOnStatus(@PathVariable("selectedStatus") String selectedStatus){
+        // StatusService.checkOpenStatus(String selectedStatus)
+        List<Integer> ids = Arrays.asList(5,1);
+        return claimsService.getClaimsByStatus(ids);
+    }
+
+    @GetMapping("/testDisplayClaims/{selectedStatus}")
+    public List<ClaimsDetails> getTestClaimsBasedOnStatus(@PathVariable("selectedStatus") String selectedStatus){
+        System.out.println(selectedStatus);
+        if (selectedStatus.equals("open")){
+            return claimsDetailsRepository.findAllByStatusOpen(true);
+        }else if (selectedStatus.equals("closed")){
+            return claimsDetailsRepository.findAllByStatusOpen(false);
+        }
+        return claimsDetailsRepository.findAll();
+    }
 }

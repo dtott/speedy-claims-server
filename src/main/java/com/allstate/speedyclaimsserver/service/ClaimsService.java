@@ -14,6 +14,8 @@ public interface ClaimsService {
     public void setCustomer(ClaimsDetails newClaimsDetails, Customer newCustomer);
     public ClaimsDetails setNewClaim(Customer newCustomer, String address);
     public void setStatus(ClaimsDetails newClaimsDetails, Statuses status);
+    public List<ClaimsDetails> getClaimsFromStatus(String selectedStatus);
+    public List<ClaimsDetails> getClaimsByStatus(List<Integer> selectedStatus);
 
 
 }

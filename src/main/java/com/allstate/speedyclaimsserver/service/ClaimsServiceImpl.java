@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -46,5 +48,17 @@ public class ClaimsServiceImpl implements ClaimsService{
         newClaimsDetails.setStatus(status);
     }
 
+    @Override
+    public List<ClaimsDetails> getClaimsFromStatus(String selectedStatus) {
+        if (selectedStatus.equals("open")){
+            List<Integer> ids = Arrays.asList(1, 2);
+            return claimsDetailsRepository.findAllById(ids);
+        }
+        System.out.println("not working" + selectedStatus);
+        return null;
+    }
 
+    public List<ClaimsDetails> getClaimsByStatus(List<Integer> selectedStatus) {
+            return null;
+    }
 }
