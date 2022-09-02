@@ -6,16 +6,14 @@ import com.allstate.speedyclaimsserver.domain.Statuses;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface ClaimsService {
 
-    public List<ClaimsDetails> getAllClaimsDetails();
     public ClaimsDetails addNewClaim(ClaimsDetails newClaimsDetails);
     public void setCustomer(ClaimsDetails newClaimsDetails, Customer newCustomer);
-    public ClaimsDetails setNewClaim(Customer newCustomer, String address);
     public void setStatus(ClaimsDetails newClaimsDetails, Statuses status);
-    public List<ClaimsDetails> getClaimsFromStatus(String selectedStatus);
-    public List<ClaimsDetails> getClaimsByStatus(List<Integer> selectedStatus);
-
+    public List<ClaimsDetails> getClaimsByStatus(String selectedStatus);
+    public ClaimsDetails updateClaimDetails(Integer id, Map<String, String> data);
 
 }

@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface CustomerService {
 
-    public Customer addNewCustomer(Customer newCustomer);
     public Customer findCustomerById(int id);
-    public Customer findCustomerByFirstName(ObjectNode objectNode);
     public Customer addNewCustomerIfNotAlreadyAdded(Customer customer);
 
 }

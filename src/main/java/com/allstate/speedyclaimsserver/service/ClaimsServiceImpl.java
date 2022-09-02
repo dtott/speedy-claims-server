@@ -8,21 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ClaimsServiceImpl implements ClaimsService{
 
     @Autowired
     private ClaimsDetailsRepository claimsDetailsRepository;
-
-
-    @Override
-    public List<ClaimsDetails> getAllClaimsDetails() {
-        return claimsDetailsRepository.findAll();
-    }
 
     @Override
     public ClaimsDetails addNewClaim(ClaimsDetails newClaimsDetails) {
@@ -35,30 +27,52 @@ public class ClaimsServiceImpl implements ClaimsService{
     }
 
     @Override
-    public ClaimsDetails setNewClaim(Customer newCustomer, String address) {
-        ClaimsDetails newClaimDetails = new ClaimsDetails();
-        newClaimDetails.setCustomer(newCustomer);
-        newClaimDetails.setAddress(address);
-        System.out.println(newClaimDetails);
-        return claimsDetailsRepository.save(newClaimDetails);
-    }
-
-    @Override
     public void setStatus(ClaimsDetails newClaimsDetails, Statuses status) {
         newClaimsDetails.setStatus(status);
     }
 
     @Override
-    public List<ClaimsDetails> getClaimsFromStatus(String selectedStatus) {
+    public List<ClaimsDetails> getClaimsByStatus(String selectedStatus) {
         if (selectedStatus.equals("open")){
-            List<Integer> ids = Arrays.asList(1, 2);
-            return claimsDetailsRepository.findAllById(ids);
+            return claimsDetailsRepository.findAllByStatusOpen(true);
+        }else if (selectedStatus.equals("closed")){
+            return claimsDetailsRepository.findAllByStatusOpen(false);
         }
-        System.out.println("not working" + selectedStatus);
-        return null;
+        return claimsDetailsRepository.findAll();
     }
 
-    public List<ClaimsDetails> getClaimsByStatus(List<Integer> selectedStatus) {
-            return null;
+    @Override
+    public ClaimsDetails updateClaimDetails(Integer id, Map<String, String> data) {
+        Optional<ClaimsDetails> getClaim = claimsDetailsRepository.findById (id);
+        ClaimsDetails claim = getClaim.get();
+        Customer customer = claim.getCustomer();
+        Statuses status = claim.getStatus();
+
+        if(data.containsKey("title")){
+            customer.setTitle(data.get("title"));
+            claim.setCustomer(customer);
+        }
+        if(data.containsKey("firstName")){
+            customer.setFirstName(data.get("firstName"));
+            claim.setCustomer(customer);
+        }
+        if(data.containsKey("surname")){
+            customer.setSurname(data.get("surname"));
+            claim.setCustomer(customer);
+        }
+        if (data.containsKey("estimatedValue")) claim.setEstimatedValue(Double.parseDouble(data.get("estimatedValue")));
+        if (data.containsKey("incidentDate")) claim.setIncidentDate(LocalDate.parse(data.get("incidentDate")));
+        if (data.containsKey("make")) claim.setMake(data.get("make"));
+        if (data.containsKey("model")) claim.setModel(data.get("model"));
+        if (data.containsKey("year")) claim.setYear(Integer.parseInt(data.get("year")));
+        if (data.containsKey("address")) claim.setAddress(data.get("address"));
+        if (data.containsKey("animalType")) claim.setAnimalType(data.get("animalType"));
+        if (data.containsKey("breed")) claim.setBreed(data.get("breed"));
+        if (data.containsKey("claimReason")) claim.setClaimReason(data.get("claimReason"));
+        if (data.containsKey("claimDescription")) claim.setClaimDescription(data.get("claimDescription"));
+        if (data.containsKey("furtherDetails")) claim.setFurtherDetails(data.get("furtherDetails"));
+        return claimsDetailsRepository.save(claim);
     }
+
+
 }

@@ -20,12 +20,6 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     private ClaimsDetailsRepository claimsDetailsRepository;
 
-
-    @Override
-    public Customer addNewCustomer(Customer newCustomer) {
-        return customerRepository.save(newCustomer);
-    }
-
     @Override
     public Customer findCustomerById(int id) {
         Optional<Customer> customerEntity = customerRepository.findById(id);
@@ -34,17 +28,6 @@ public class CustomerServiceImpl implements CustomerService{
             return newCustomerEntity;
         }
         // add error here
-        return null;
-    }
-
-    @Override
-    public Customer findCustomerByFirstName(ObjectNode objectNode) {
-        Optional<Customer> customerEntity = customerRepository.findCustomerByFirstNameAndSurname(objectNode.get("firstName").asText(), objectNode.get("surname").asText());
-        System.out.println(customerEntity);
-        if (customerEntity.isPresent()){
-            Customer newCustomerEntity = customerEntity.get();
-            return newCustomerEntity;
-        }
         return null;
     }
 

@@ -17,20 +17,21 @@ public class BootstrapService {
 
     @PostConstruct
     public void inititalizeData(){
-        Statuses newStatus = new Statuses(null, "new", "awaiting assessment", true);
-        Statuses openStatus = new Statuses(null, "Open", "currently under assessment", true);
-        Statuses acceptedStatus = new Statuses(null, "accepted", "awaiting payment", true);
-        Statuses paidStatus = new Statuses(null, "paid", "payment complete", false);
-        Statuses rejectedStatus = new Statuses(null, "rejected", "claim unsuccessful", false);
-        Statuses pushedStatus = new Statuses(null, "pushed", "passed to main claims system", false);
+        if (statusRepository.findAll().size() == 0){
+            Statuses newStatus = new Statuses(null, "new", "awaiting assessment", true);
+            Statuses openStatus = new Statuses(null, "Open", "currently under assessment", true);
+            Statuses acceptedStatus = new Statuses(null, "accepted", "awaiting payment", true);
+            Statuses paidStatus = new Statuses(null, "paid", "payment complete", false);
+            Statuses rejectedStatus = new Statuses(null, "rejected", "claim unsuccessful", false);
+            Statuses pushedStatus = new Statuses(null, "pushed", "passed to main claims system", false);
 
-        statusRepository.save(newStatus);
-        statusRepository.save(openStatus);
-        statusRepository.save(acceptedStatus);
-        statusRepository.save(paidStatus);
-        statusRepository.save(rejectedStatus);
-        statusRepository.save(pushedStatus);
+            statusRepository.save(newStatus);
+            statusRepository.save(openStatus);
+            statusRepository.save(acceptedStatus);
+            statusRepository.save(paidStatus);
+            statusRepository.save(rejectedStatus);
+            statusRepository.save(pushedStatus);
+        }
 
     }
-
 }

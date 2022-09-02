@@ -14,9 +14,6 @@ public class Statuses {
     private String description;
     private boolean open;
 
-    @OneToMany
-    private List<ClaimsDetails> claimsDetails;
-
     public Statuses() {
     }
 
