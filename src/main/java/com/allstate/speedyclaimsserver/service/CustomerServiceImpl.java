@@ -27,7 +27,6 @@ public class CustomerServiceImpl implements CustomerService{
             Customer newCustomerEntity = customerEntity.get();
             return newCustomerEntity;
         }
-        // add error here
         return null;
     }
 

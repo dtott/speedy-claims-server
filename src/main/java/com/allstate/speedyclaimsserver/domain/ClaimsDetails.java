@@ -3,6 +3,7 @@ package com.allstate.speedyclaimsserver.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class ClaimsDetails {
@@ -220,5 +221,18 @@ public class ClaimsDetails {
                 ", animalType='" + animalType + '\'' +
                 ", breed='" + breed + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClaimsDetails that = (ClaimsDetails) o;
+        return Objects.equals(claimId, that.claimId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(claimId);
     }
 }

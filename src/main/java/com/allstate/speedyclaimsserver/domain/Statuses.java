@@ -2,6 +2,7 @@ package com.allstate.speedyclaimsserver.domain;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Statuses {
@@ -55,4 +56,19 @@ public class Statuses {
     public void setOpen(boolean open) {
         this.open = open;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Statuses statuses = (Statuses) o;
+        return Objects.equals(id, statuses.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
+
+

@@ -16,6 +16,9 @@ public class ClaimsServiceImpl implements ClaimsService{
     @Autowired
     private ClaimsDetailsRepository claimsDetailsRepository;
 
+    @Autowired
+    private StatusService statusService;
+
     @Override
     public ClaimsDetails addNewClaim(ClaimsDetails newClaimsDetails) {
         return claimsDetailsRepository.save(newClaimsDetails);
@@ -46,7 +49,6 @@ public class ClaimsServiceImpl implements ClaimsService{
         Optional<ClaimsDetails> getClaim = claimsDetailsRepository.findById (id);
         ClaimsDetails claim = getClaim.get();
         Customer customer = claim.getCustomer();
-        Statuses status = claim.getStatus();
 
         if(data.containsKey("title")){
             customer.setTitle(data.get("title"));
@@ -72,6 +74,21 @@ public class ClaimsServiceImpl implements ClaimsService{
         if (data.containsKey("claimDescription")) claim.setClaimDescription(data.get("claimDescription"));
         if (data.containsKey("furtherDetails")) claim.setFurtherDetails(data.get("furtherDetails"));
         return claimsDetailsRepository.save(claim);
+    }
+
+    @Override
+    public ClaimsDetails updateClaimStatus(Integer claimId, Integer statusId) {
+        Optional<ClaimsDetails> getClaim = claimsDetailsRepository.findById(claimId);
+        ClaimsDetails claim = getClaim.get();
+        Statuses newStatus = statusService.findStatusById(statusId);
+        claim.setStatus(newStatus);
+        return claimsDetailsRepository.save(claim);
+    }
+
+    @Override
+    public ClaimsDetails findById(Integer id) {
+        Optional<ClaimsDetails> validClaim = claimsDetailsRepository.findById(id);
+        return validClaim.get();
     }
 
 

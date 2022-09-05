@@ -2,6 +2,7 @@ package com.allstate.speedyclaimsserver.domain;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Customer {
@@ -17,7 +18,7 @@ public class Customer {
     @Column(nullable = false)
     private String surname;
 
-    public Customer(Integer customerID, String title, String firstName, String surname, List<ClaimsDetails> claimsDetails) {
+    public Customer(Integer customerID, String title, String firstName, String surname) {
         this.customerID = customerID;
         this.title = title;
         this.firstName = firstName;
@@ -67,5 +68,18 @@ public class Customer {
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(customerID, customer.customerID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerID);
     }
 }

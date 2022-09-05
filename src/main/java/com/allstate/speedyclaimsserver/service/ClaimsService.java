@@ -15,5 +15,7 @@ public interface ClaimsService {
     public void setStatus(ClaimsDetails newClaimsDetails, Statuses status);
     public List<ClaimsDetails> getClaimsByStatus(String selectedStatus);
     public ClaimsDetails updateClaimDetails(Integer id, Map<String, String> data);
+    public ClaimsDetails updateClaimStatus(Integer claimId, Integer statusId);
+    public ClaimsDetails findById(Integer id);
 
 }
