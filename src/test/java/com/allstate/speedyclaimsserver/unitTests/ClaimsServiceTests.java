@@ -50,13 +50,13 @@ public class ClaimsServiceTests {
 
         Mockito.when(claimsDetailsRepository.save(new ClaimsDetails())).thenReturn(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
 
         ClaimsDetails result = claimsService.addNewClaim(new ClaimsDetails());
 
         assertEquals(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null), result);
+                "renault", "clio", 2012, null, null, null, null), result);
 
     }
 
@@ -65,13 +65,13 @@ public class ClaimsServiceTests {
 
         Mockito.when(claimsDetailsRepository.findById(1)).thenReturn(Optional.of(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null)));
+                "renault", "clio", 2012, null, null, null, null)));
 
         ClaimsDetails results = claimsService.findById(1);
 
         assertEquals(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null), results);
+                "renault", "clio", 2012, null, null, null, null), results);
 
     }
 
@@ -81,10 +81,10 @@ public class ClaimsServiceTests {
         List<ClaimsDetails> trueList = new ArrayList<>();
         trueList.add(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
         trueList.add(new ClaimsDetails(2, new Customer(3, "Miss", "Sally", "White"), new Statuses(2, "open", "open", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
 
         Mockito.when(claimsDetailsRepository.findAllByStatusOpen(true)).thenReturn(trueList);
 
@@ -101,17 +101,17 @@ public class ClaimsServiceTests {
 
         Mockito.when(claimsDetailsRepository.findById(1)).thenReturn(Optional.of(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null)));
+                "renault", "clio", 2012, null, null, null, null)));
 
         Mockito.when(mockStatusService.findStatusById(1)).thenReturn(new Statuses(1, "new", "new", true));
 
         ClaimsDetails claim = new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null);
+                "renault", "clio", 2012, null, null, null, null);
 
         Mockito.when(claimsDetailsRepository.save(claim)).thenReturn(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
 
         ClaimsDetails result = claimsService.updateClaimStatus(1, 1);
 

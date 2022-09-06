@@ -64,13 +64,13 @@ public class ControllerClassTests {
         Statuses newStatus = new Statuses(1, "new", "awaiting assessment", true);
         Mockito.when(claimsService.addNewClaim(new ClaimsDetails())).thenReturn(new ClaimsDetails(1, newCustomer, newStatus, "Motor", 200.00, null,
                 "crashed Car", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
 
         ClaimsDetails result = claimsController.addNewClaim(new ClaimsDetails(), 1);
 
         ClaimsDetails expectedClaim = new ClaimsDetails(1, newCustomer, newStatus, "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null);
+                "renault", "clio", 2012, null, null, null, null);
 
         assertEquals(expectedClaim, result);
 
@@ -82,10 +82,10 @@ public class ControllerClassTests {
         List<ClaimsDetails> newClaims = new ArrayList<>();
         newClaims.add(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
         newClaims.add(new ClaimsDetails(3, new Customer(2, "Mr", "Joe", "Bloggs"), new Statuses(1, "new", "awaiting assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null));
+                "renault", "clio", 2012, null, null, null, null));
 
         Mockito.when(claimsService.getClaimsByStatus("open")).thenReturn(newClaims);
 
@@ -101,13 +101,13 @@ public class ControllerClassTests {
 
         Mockito.when(claimsService.updateClaimStatus(1, 2)).thenReturn(new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(2, "open", "currently under assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null ));
+                "renault", "clio", 2012, null, null, null, null ));
 
         ClaimsDetails result = claimsController.updateClaimStatus(1,2);
 
         ClaimsDetails expectedResult = new ClaimsDetails(1, new Customer(1, "Mr", "John", "Smith"), new Statuses(2, "open", "currently under assessment", true), "Motor", 200.00, null,
                 "crashed Car!", "backed into lamp post", null, null,
-                "renault", "clio", 2012, null, null, null );
+                "renault", "clio", 2012, null, null, null, null );
 
         assertEquals(expectedResult, result);
 

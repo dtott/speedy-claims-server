@@ -51,10 +51,12 @@ public class ClaimsDetails {
     private String animalType;
     private String breed;
 
+    private Double paidAmount;
+
     public ClaimsDetails() {
     }
 
-    public ClaimsDetails(Integer claimId, Customer customer, Statuses status, String type, Double estimatedValue, LocalDate claimOpenDate, String claimReason, String claimDescription, LocalDate incidentDate, String furtherDetails, String make, String model, Integer year, String address, String animalType, String breed) {
+    public ClaimsDetails(Integer claimId, Customer customer, Statuses status, String type, Double estimatedValue, LocalDate claimOpenDate, String claimReason, String claimDescription, LocalDate incidentDate, String furtherDetails, String make, String model, Integer year, String address, String animalType, String breed, Double paidAmount) {
         this.claimId = claimId;
         this.customer = customer;
         this.status = status;
@@ -71,10 +73,19 @@ public class ClaimsDetails {
         this.address = address;
         this.animalType = animalType;
         this.breed = breed;
+        this.paidAmount = paidAmount;
     }
 
     public Integer getClaimId() {
         return claimId;
+    }
+
+    public Double getPaidAmount() {
+        return paidAmount;
+    }
+
+    public void setPaidAmount(Double paidAmount) {
+        this.paidAmount = paidAmount;
     }
 
     public void setClaimId(Integer claimId) {

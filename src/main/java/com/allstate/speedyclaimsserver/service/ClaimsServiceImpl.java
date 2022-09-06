@@ -73,6 +73,7 @@ public class ClaimsServiceImpl implements ClaimsService{
         if (data.containsKey("claimReason")) claim.setClaimReason(data.get("claimReason"));
         if (data.containsKey("claimDescription")) claim.setClaimDescription(data.get("claimDescription"));
         if (data.containsKey("furtherDetails")) claim.setFurtherDetails(data.get("furtherDetails"));
+        if (data.containsKey("paidAmount")) claim.setPaidAmount(Double.parseDouble(data.get("paidAmount")));
         return claimsDetailsRepository.save(claim);
     }
 
@@ -90,6 +91,5 @@ public class ClaimsServiceImpl implements ClaimsService{
         Optional<ClaimsDetails> validClaim = claimsDetailsRepository.findById(id);
         return validClaim.get();
     }
-
 
 }
