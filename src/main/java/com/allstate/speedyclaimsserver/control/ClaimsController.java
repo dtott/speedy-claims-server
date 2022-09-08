@@ -25,7 +25,8 @@ public class ClaimsController {
     @Autowired
     private StatusService statusService;
 
-    @PostMapping("/addNewClaim/{id}")
+    //addNewClaim
+    @PostMapping("/claim/{id}")
     public ClaimsDetails addNewClaim(@RequestBody ClaimsDetails newClaimsDetails, @PathVariable("id") Integer id){
         Customer newCustomer = customerService.findCustomerById(id);
         Statuses newStatus = statusService.findStatusById(1);
@@ -34,27 +35,32 @@ public class ClaimsController {
         return claimsService.addNewClaim(newClaimsDetails);
     }
 
-    @PostMapping("/addNewCustomer")
+    //addNewCustomer
+    @PostMapping("/customer")
     public Customer addNewCustomer(@RequestBody Customer customer){
         return customerService.addNewCustomerIfNotAlreadyAdded(customer);
     }
 
-    @GetMapping("/DisplayClaims/{selectedStatus}")
-    public List<ClaimsDetails> getClaimsBasedOnStatus(@PathVariable("selectedStatus") String selectedStatus){
+    //getClaimsWithSelectedStatus
+    @GetMapping("/claim")
+    public List<ClaimsDetails> getClaimsBasedOnStatus(@RequestParam(value="selectedStatus", required = false) String selectedStatus){
         return claimsService.getClaimsByStatus(selectedStatus);
     }
 
-    @GetMapping("/getClaim/{id}")
+    //getClaim
+    @GetMapping("/claim/{id}")
     public ClaimsDetails getClaimDetailsById(@PathVariable("id") Integer id){
         return claimsService.findById(id);
     }
 
-    @PutMapping("/updateClaim/{id}")
+    //updateClaim
+    @PutMapping("/claim/{id}")
     public ClaimsDetails updateClaimDetails(@PathVariable("id") Integer id, @RequestBody Map<String, String> data){
         return claimsService.updateClaimDetails(id, data);
     }
 
-    @PutMapping("/updateClaimStatus/{claimId}/{statusId}")
+    //updateClaimStatus
+    @PutMapping("/claim/{claimId}/{statusId}")
     public ClaimsDetails updateClaimStatus(@PathVariable("claimId") Integer claimId, @PathVariable("statusId") Integer statusId){
         return claimsService.updateClaimStatus(claimId, statusId);
     }
