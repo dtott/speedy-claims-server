@@ -1,6 +1,8 @@
 package com.allstate.speedyclaimsserver.unitTests;
 
 import com.allstate.speedyclaimsserver.control.ClaimsController;
+import com.allstate.speedyclaimsserver.control.LoginController;
+import com.allstate.speedyclaimsserver.data.UserRepository;
 import com.allstate.speedyclaimsserver.domain.ClaimsDetails;
 import com.allstate.speedyclaimsserver.domain.Customer;
 import com.allstate.speedyclaimsserver.domain.Statuses;
@@ -44,6 +46,12 @@ public class ControllerClassTests {
 
     @MockBean
     BootstrapService bootstrapService;
+
+    @MockBean
+    LoginController loginController;
+
+    @MockBean
+    UserRepository userRepository;
 
     //Post controller test
     @Test

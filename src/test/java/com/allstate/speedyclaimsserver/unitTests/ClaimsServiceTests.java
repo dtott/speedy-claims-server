@@ -1,8 +1,11 @@
 package com.allstate.speedyclaimsserver.unitTests;
 
+import com.allstate.speedyclaimsserver.config.SecurityConfig;
+import com.allstate.speedyclaimsserver.control.LoginController;
 import com.allstate.speedyclaimsserver.data.ClaimsDetailsRepository;
 import com.allstate.speedyclaimsserver.data.CustomerRepository;
 import com.allstate.speedyclaimsserver.data.StatusRepository;
+import com.allstate.speedyclaimsserver.data.UserRepository;
 import com.allstate.speedyclaimsserver.domain.ClaimsDetails;
 import com.allstate.speedyclaimsserver.domain.Customer;
 import com.allstate.speedyclaimsserver.domain.Statuses;
@@ -44,6 +47,12 @@ public class ClaimsServiceTests {
 
     @MockBean
     StatusService mockStatusService;
+
+    @MockBean
+    LoginController loginController;
+
+    @MockBean
+    UserRepository userRepository;
 
     @Test
     public void testAddNewClaim(){

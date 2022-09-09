@@ -1,8 +1,10 @@
 package com.allstate.speedyclaimsserver.unitTests;
 
+import com.allstate.speedyclaimsserver.control.LoginController;
 import com.allstate.speedyclaimsserver.data.ClaimsDetailsRepository;
 import com.allstate.speedyclaimsserver.data.CustomerRepository;
 import com.allstate.speedyclaimsserver.data.StatusRepository;
+import com.allstate.speedyclaimsserver.data.UserRepository;
 import com.allstate.speedyclaimsserver.domain.Customer;
 import com.allstate.speedyclaimsserver.service.CustomerService;
 import org.junit.jupiter.api.Test;
@@ -36,6 +38,12 @@ public class CustomerServiceTests {
 
     @MockBean
     StatusRepository statusRepository;
+
+    @MockBean
+    LoginController loginController;
+
+    @MockBean
+    UserRepository userRepository;
 
     @Test
     public void testFindCustomerByID(){
